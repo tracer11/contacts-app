@@ -1,9 +1,16 @@
 <h1>Contact</h1>
-<h5><%= @contact.friendly_updated_at %></h5>
-<h1> <%= @contact.first_name %> </h1>
-<h1> <%= @contact.last_name %> </h1>
-<h1> <%= @contact.email %> </h1>
-<h1> <%= @contact.phone_number %> </h1>
-
+<br>
+<% if current_user %>
+  <h5><%= @contact.friendly_updated_at %></h5>
+  <h1> <%= @contact.first_name %> </h1>
+  <h1> <%= @contact.last_name %> </h1>
+  <h1> <%= @contact.email %> </h1>
+  <h1> <%= @contact.phone_number %> </h1>
+  <% @contact.groups.each do |group| %>
+    <li><%= group.name %></li>
+  <% end %>
+<% else %>
+ <h1><%= @contact %></h1>
+<% end %>
 <a href="/contacts/<%= @contact.id %>/edit">Edit Contact</a>
 <%= link_to "Delete", "/contacts/#{@contact.id}", method: :delete %>
